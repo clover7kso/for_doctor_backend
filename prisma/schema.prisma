@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  email          String     @id @default(cuid())
+  password       String
+  userName       String     @unique
+  medical_id     String
+  medical_cate   String
+  medical_certi  certiImage
+  permit         Boolean    @default(false)
+  registerAt     DateTime   @updatedAt @default(now())
+  registerSecret String     @default("")
+
+  posts    Post[]    @relation("PostAuthor")
+  likes    Like[]
+  comments Comment[]
+
+  inbox  Message[] @relation("MessageReceiver")
+  outbox Message[] @relation("MessageSender")
+  rooms  Room[]    @relation(name: "RoomParticipants")
+
+  @@unique([medical_id, medical_cate])
+}
+
+model certiImage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  url     String
+  emailId String
+  user    User   @relation(fields: [emailId], references: [email])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  user      User     @relation(name: "PostAuthor", fields: [userName], references: [userName])
+  userName  String   @default("익명")
+  updatedAt DateTime @updatedAt @default(now())
+  createdAt DateTime @default(now())
+
+  category String
+  title    String
+  content  String    @default("")
+  views    Int
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userName], references: [userName])
+  userName  String   @default("익명")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  text   String
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
+}
+
+model Product {
+  id        String    @id @default(cuid())
+  updatedAt DateTime  @updatedAt @default(now())
+  createdAt DateTime  @default(now())
+  expireAt  DateTime?
+
+  bigImage    bigImage
+  smallImages smallImage[]
+  title       String
+  content     String       @default("")
+  views       Int
+  tag         String
+  Like        Like[]
+}
+
+model bigImage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  url       String
+  productId String  @unique
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model smallImage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  url       String
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  userName  String
+  user      User    @relation(fields: [userName], references: [userName])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  messages     Message[]
+  participants User[]    @relation(name: "RoomParticipants", references: [email])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  text         String
+  roomId       String
+  room         Room   @relation(fields: [roomId], references: [id])
+  fromUserName String
+  toUserName   String
+  from         User   @relation("MessageSender", fields: [fromUserName], references: [userName])
+  to           User   @relation("MessageReceiver", fields: [toUserName], references: [userName])
+}
