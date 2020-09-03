@@ -8,23 +8,25 @@ datasource db {
 }
 
 model User {
-  email          String     @id @default(cuid())
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  avatar         String?
   password       String
   userName       String     @unique
+  email          String     @unique
   medical_id     String
   medical_cate   String
   medical_certi  certiImage
   permit         Boolean    @default(false)
-  registerAt     DateTime   @updatedAt @default(now())
   registerSecret String     @default("")
+  likes          Like[]
 
-  posts    Post[]    @relation("PostAuthor")
-  likes    Like[]
-  comments Comment[]
-
-  inbox  Message[] @relation("MessageReceiver")
-  outbox Message[] @relation("MessageSender")
-  rooms  Room[]    @relation(name: "RoomParticipants")
+  alertbox PostAlert[]
+  Post     Post[]      @relation("PostAuthor")
+  inbox    Message[]   @relation("MessageReceiver")
+  outbox   Message[]   @relation("MessageSender")
 
   @@unique([medical_id, medical_cate])
 }
@@ -46,16 +48,28 @@ model Post {
   updatedAt DateTime @updatedAt @default(now())
   createdAt DateTime @default(now())
 
-  category String
-  title    String
-  content  String    @default("")
-  views    Int
-  comments Comment[]
+  category  String
+  title     String
+  content   String
+  views     Int
+  comments  Comment[]
+  PostAlert PostAlert[]
+}
+
+model PostAlert {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
 }
 
 model Comment {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [userName], references: [userName])
+  user      User     @relation(name: "PostAuthor", fields: [userName], references: [userName])
   userName  String   @default("익명")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -71,16 +85,16 @@ model Product {
   createdAt DateTime  @default(now())
   expireAt  DateTime?
 
-  bigImage    bigImage
-  smallImages smallImage[]
-  title       String
-  content     String       @default("")
-  views       Int
-  tag         String
-  Like        Like[]
+  productImage productImage
+  detailImages detailImage[]
+  title        String
+  content      String        @default("")
+  views        Int
+  tag          String
+  Like         Like[]
 }
 
-model bigImage {
+model productImage {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -90,7 +104,7 @@ model bigImage {
   product   Product @relation(fields: [productId], references: [id])
 }
 
-model smallImage {
+model detailImage {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -105,19 +119,10 @@ model Like {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 
-  userName  String
-  user      User    @relation(fields: [userName], references: [userName])
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
   productId String
   product   Product @relation(fields: [productId], references: [id])
-}
-
-model Room {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-
-  messages     Message[]
-  participants User[]    @relation(name: "RoomParticipants", references: [email])
 }
 
 model Message {
@@ -126,8 +131,6 @@ model Message {
   updatedAt DateTime @updatedAt
 
   text         String
-  roomId       String
-  room         Room   @relation(fields: [roomId], references: [id])
   fromUserName String
   toUserName   String
   from         User   @relation("MessageSender", fields: [fromUserName], references: [userName])
