@@ -1,22 +1,20 @@
-import { adjectives, nouns } from "./words";
-import nodemailer from "nodemailer";
-import sgTransport from "nodemailer-sendgrid-transport";
 import jwt from "jsonwebtoken";
 
 export const generateSecret = () => {
-  const randomNumber = Math.floor(Math.random() * adjectives.length);
-  return `${adjectives[randomNumber]} ${nouns[randomNumber]}`;
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < 20; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 };
 
 const sendMail = (email) => {
-  const options = {
-    auth: {
-      api_user: process.env.SENDGRID_USERNAME,
-      api_key: process.env.SENDGRID_PASSWORD,
-    },
-  };
-  const client = nodemailer.createTransport(sgTransport(options));
-  return client.sendMail(email);
+  const sgMail = require("@sendgrid/mail");
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  return sgMail.send(email);
 };
 
 export const sendSecretMail = (adress, secret) => {
@@ -24,7 +22,7 @@ export const sendSecretMail = (adress, secret) => {
     from: process.env.ADMIN_EMAIL,
     to: adress,
     subject: "🔒Login Secret for Prismagram🔒",
-    html: `Hello! Your login secret is <strong>${secret}</strong>.<br/>Copy paste on the app/website to log in`,
+    html: `안녕하세요! 회원가입 완료를 위한 비밀코드는 <strong>${secret}</strong> 입니다.<br/> 앱 또는 웹에서 복사붙여넣기하여 회원가입을 완료해주세요`,
   };
   return sendMail(email);
 };

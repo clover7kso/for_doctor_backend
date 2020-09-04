@@ -3,80 +3,59 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 
   avatar         String?
   password       String
-  userName       String     @unique
-  email          String     @unique
+  nickname       String  @unique
+  email          String  @unique
   medical_id     String
   medical_cate   String
-  medical_certi  certiImage
-  permit         Boolean    @default(false)
-  registerSecret String     @default("")
+  medical_certi  String
+  permit         Boolean @default(false)
+  email_check    Boolean @default(false)
+  registerSecret String  @default("")
   likes          Like[]
 
-  alertbox PostAlert[]
-  Post     Post[]      @relation("PostAuthor")
-  inbox    Message[]   @relation("MessageReceiver")
-  outbox   Message[]   @relation("MessageSender")
+  Post    Post[]    @relation("PostAuthor")
+  Comment Comment[] @relation("CommentAuthor")
+  inbox   Message[] @relation("MessageReceiver")
+  outbox  Message[] @relation("MessageSender")
 
   @@unique([medical_id, medical_cate])
 }
 
-model certiImage {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-
-  url     String
-  emailId String
-  user    User   @relation(fields: [emailId], references: [email])
-}
-
 model Post {
-  id        String   @id @default(cuid())
-  user      User     @relation(name: "PostAuthor", fields: [userName], references: [userName])
-  userName  String   @default("익명")
-  updatedAt DateTime @updatedAt @default(now())
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  user         User     @relation(name: "PostAuthor", fields: [userNickname], references: [nickname])
+  userNickname String   @default("익명")
+  updatedAt    DateTime @updatedAt @default(now())
+  createdAt    DateTime @default(now())
 
-  category  String
-  title     String
-  content   String
-  views     Int
-  comments  Comment[]
-  PostAlert PostAlert[]
-}
-
-model PostAlert {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-  postId String
-  post   Post   @relation(fields: [postId], references: [id])
+  category String
+  title    String
+  content  String
+  views    Int
+  comments Comment[]
 }
 
 model Comment {
-  id        String   @id @default(cuid())
-  user      User     @relation(name: "PostAuthor", fields: [userName], references: [userName])
-  userName  String   @default("익명")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  id           String   @id @default(cuid())
+  user         User     @relation(name: "CommentAuthor", fields: [userNickname], references: [nickname])
+  userNickname String   @default("익명")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt @default(now())
 
   text   String
-  postId String
   post   Post   @relation(fields: [postId], references: [id])
+  postId String
 }
 
 model Product {
@@ -130,9 +109,9 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  text         String
-  fromUserName String
-  toUserName   String
-  from         User   @relation("MessageSender", fields: [fromUserName], references: [userName])
-  to           User   @relation("MessageReceiver", fields: [toUserName], references: [userName])
+  text           String
+  fromNickname   String
+  toUserNickname String
+  from           User   @relation("MessageSender", fields: [fromNickname], references: [nickname])
+  to             User   @relation("MessageReceiver", fields: [toUserNickname], references: [nickname])
 }

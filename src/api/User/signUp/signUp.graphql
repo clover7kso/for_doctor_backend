@@ -1,0 +1,11 @@
+type Mutation {
+  signUp(
+    id: String!
+    password: String!
+    nickname: String!
+    email: String!
+    medical_id: String!
+    medical_cate: String!
+    medical_certi: String!
+  ): Boolean!
+}

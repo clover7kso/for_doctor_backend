@@ -1,26 +1,23 @@
-import {generateToken} from "../../../utils";
-
 export default {
   Mutation: {
-    confirmSecret: async(_, args, {request, prisma}) => {
+    confirmSecret: async (_, args, { request, prisma }) => {
       //console.log(request);
-      const {email, secret} = args;
+      const { id, secret } = args;
       const user = await prisma.user.findOne({
-        where: {email}
+        where: { id },
       });
-      if(user.loginSecret === secret) {
-        const token = generateToken(user.id);
+      if (user.registerSecret === secret) {
         await prisma.user.update({
-          where: {id: user.id},
+          where: { id: user.id },
           data: {
-            loginSecret: ""
-          }
+            email_check: true,
+            registerSecret: "",
+          },
         });
-        return token;
+        return true;
+      } else {
+        return false;
       }
-      else {
-        throw Error("Wrong Email/Secret combination");
-      }
-    }
-  }
-}
+    },
+  },
+};
