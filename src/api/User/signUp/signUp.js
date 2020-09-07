@@ -5,7 +5,6 @@ export default {
         id,
         password,
         nickname,
-        email,
         medical_id,
         medical_cate,
         medical_certi,
@@ -13,14 +12,12 @@ export default {
 
       const exist = await prisma.user.findMany({
         where: {
-          OR: [{ id }, { nickname }, { email }, { medical_id, medical_cate }],
+          OR: [{ id }, { nickname }, { medical_id, medical_cate }],
         },
       });
       if (exist && exist.length > 0) {
         if (exist.filter((user) => user.id == id).length > 0) {
           throw Error("This id already taken");
-        } else if (exist.filter((user) => user.email == email).length > 0) {
-          throw Error("This email already taken");
         } else if (
           exist.filter((user) => user.nickname == nickname).length > 0
         ) {
@@ -40,7 +37,6 @@ export default {
           id,
           password,
           nickname,
-          email,
           medical_id,
           medical_cate,
           medical_certi,

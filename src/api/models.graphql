@@ -7,7 +7,6 @@ type User {
   avatar: String
   password: String!
   userName: String!
-  email: String!
   medical_id: String!
   medical_cate: String!
   medical_certi: certiImage!
