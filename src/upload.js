@@ -12,11 +12,11 @@ const upload = multer({
   storage: multerS3({
     s3,
     acl: "public-read",
-    bucket: "prismagram",
-    metadata: function(req, file, cb) {
+    bucket: "for-doctor",
+    metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function(req, file, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString());
     },
   }),
