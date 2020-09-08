@@ -1,8 +1,9 @@
 export default {
   Mutation: {
-    confirmSecret: async (_, args, { request, prisma }) => {
+    confirmSecret: async (_, args, { prisma }) => {
       //console.log(request);
       const { id, secret } = args;
+
       const user = await prisma.user.findOne({
         where: { id },
       });
@@ -16,7 +17,7 @@ export default {
         });
         return true;
       } else {
-        return false;
+        throw Error("비밀코드가 일치하지 않습니다");
       }
     },
   },

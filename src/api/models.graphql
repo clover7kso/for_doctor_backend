@@ -13,7 +13,7 @@ type User {
   permit: Boolean!
   email_check: Boolean!
 
-  loginSecret: String!
+  registerSecret: String!
 }
 
 type certiImage {

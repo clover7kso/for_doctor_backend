@@ -1,3 +1,5 @@
+import { generateSecret, sendSecretMail } from "../../../utils";
+
 export default {
   Mutation: {
     signUp: async (_, args, { prisma }) => {
@@ -17,18 +19,18 @@ export default {
       });
       if (exist && exist.length > 0) {
         if (exist.filter((user) => user.id == id).length > 0) {
-          throw Error("This id already taken");
+          throw Error("이미 존재하는 ID 입니다");
         } else if (
           exist.filter((user) => user.nickname == nickname).length > 0
         ) {
-          throw Error("This username already taken");
+          throw Error("이미 사용중인 닉네임입니다");
         } else if (
           exist.filter(
             (user) =>
               user.medical_id == medical_id && user.medical_cate == medical_cate
           ).length > 0
         ) {
-          throw Error("This medical_id and medical_cate already taken");
+          throw Error("면허분류와 면허번호가 이미 회원가입되있습니다");
         }
       }
 
@@ -42,7 +44,25 @@ export default {
           medical_certi,
         },
       });
-      return true;
+
+      const registerSecret = generateSecret();
+      console.log(registerSecret);
+      try {
+        //throw Error();
+        await sendSecretMail(id, registerSecret);
+        await prisma.user.update({
+          data: {
+            registerSecret,
+          },
+          where: {
+            id,
+          },
+        });
+        return true;
+      } catch (e) {
+        console.log(ex);
+        throw Error("이메일 발송에 실패했습니다");
+      }
     },
   },
 };
