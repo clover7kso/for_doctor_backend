@@ -1,0 +1,3 @@
+type Query {
+  postOne(id: String!): Post!
+}

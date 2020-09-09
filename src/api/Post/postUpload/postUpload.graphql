@@ -1,0 +1,9 @@
+type Mutation {
+  postUpload(
+    id: String!
+    userNickname: String
+    category: String!
+    title: String!
+    content: String!
+  ): Boolean!
+}

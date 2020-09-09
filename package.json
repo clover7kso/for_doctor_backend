@@ -12,7 +12,7 @@
     "@prisma/client": "^2.6.2",
     "@sendgrid/mail": "^7.2.5",
     "add": "^2.0.6",
-    "aws-sdk": "^2.747.0",
+    "aws-sdk": "^2.748.0",
     "copy": "^0.3.2",
     "dotenv": "^8.2.0",
     "global": "^4.4.0",
@@ -36,7 +36,7 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "db_studio": "prisma studio --experimental",
     "db_pull": "prisma introspect & prisma generate",
-    "db_push": "prisma2 migrate save --name \"init\" --experimental & prisma migrate up --experimental & prisma generate"
+    "db_push": "prisma migrate save --name \"init\" --experimental & prisma migrate up --experimental & prisma generate"
   },
   "repository": {
     "type": "git",

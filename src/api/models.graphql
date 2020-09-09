@@ -1,5 +1,4 @@
 type User {
-  Hello: String!
   id: ID!
   createdAt: String!
   updatedAt: String
@@ -9,17 +8,32 @@ type User {
   userName: String!
   medical_id: String!
   medical_cate: String!
-  medical_certi: certiImage!
+  medical_certi: String!
   permit: Boolean!
   email_check: Boolean!
 
   registerSecret: String!
 }
 
-type certiImage {
-  id: ID!
+type Post {
+  id: String!
+  updatedAt: String
+  createdAt: String!
+  userNickname: String
+
+  category: String!
+  title: String!
+  content: String!
+  views: Int!
+  todayViews: Int!
+  comments: [Comment]
+}
+
+type Comment {
+  postId: String!
+  id: String!
+  userNickname: String
   createdAt: String!
   updatedAt: String
-
-  user: User!
+  text: String!
 }
