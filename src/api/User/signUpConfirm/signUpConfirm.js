@@ -1,6 +1,6 @@
 export default {
   Mutation: {
-    confirmSecret: async (_, args, { prisma }) => {
+    signUpConfirm: async (_, args, { prisma }) => {
       //console.log(request);
       const { id, secret } = args;
 

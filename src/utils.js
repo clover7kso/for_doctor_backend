@@ -27,4 +27,14 @@ export const sendSecretMail = (adress, secret) => {
   return sendMail(email);
 };
 
+export const sendPasswordMail = (adress, password) => {
+  const email = {
+    from: process.env.ADMIN_EMAIL,
+    to: adress,
+    subject: "🔒Login Secret for Prismagram🔒",
+    html: `회원님의 비밀번호는 <strong>${password}</strong> 입니다.<br/>`,
+  };
+  return sendMail(email);
+};
+
 export const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET);

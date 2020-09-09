@@ -59,7 +59,7 @@ export default {
           },
         });
         return true;
-      } catch (e) {
+      } catch (ex) {
         console.log(ex);
         throw Error("이메일 발송에 실패했습니다");
       }

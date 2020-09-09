@@ -1,0 +1,3 @@
+type Mutation {
+  findPwConfirm(id: String!, secret: String!): Boolean!
+}

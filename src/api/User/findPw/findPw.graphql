@@ -1,0 +1,3 @@
+type Mutation {
+  findPw(id: String!, medical_id: String!, medical_cate: String!): Boolean!
+}
