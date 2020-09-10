@@ -1,11 +1,12 @@
 export default {
   Query: {
     postTop: async (_, args, { prisma }) => {
-      const { category } = args;
+      const {} = args;
 
       const posts = await prisma.post.findMany({
-        where: {
-          category,
+        distinct: ["category"],
+        orderBy: {
+          todayViews: "desc",
         },
       });
       return posts;

@@ -19,7 +19,7 @@ type Post {
   id: String!
   updatedAt: String
   createdAt: String!
-  userNickname: String
+  userNickname: String!
 
   category: String!
   title: String!
@@ -27,6 +27,7 @@ type Post {
   views: Int!
   todayViews: Int!
   comments: [Comment]
+  anonymous: Boolean!
 }
 
 type Comment {
