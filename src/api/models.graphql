@@ -1,3 +1,13 @@
+type HomeAD {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  expireAt: String
+
+  imageUrl: String!
+  url: String!
+}
+
 type User {
   id: ID!
   createdAt: String!

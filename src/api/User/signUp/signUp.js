@@ -15,14 +15,12 @@ export default {
 
       const exist = await prisma.user.findMany({
         where: {
-          OR: [{ id }, { name }, { medical_id, medical_cate }, { phone }],
+          OR: [{ id }, { medical_id, medical_cate }, { phone }],
         },
       });
       if (exist && exist.length > 0) {
         if (exist.filter((user) => user.id == id).length > 0) {
           throw Error("이미 존재하는 ID 입니다");
-        } else if (exist.filter((user) => user.name == name).length > 0) {
-          throw Error("이미 사용중인 닉네임입니다");
         } else if (exist.filter((user) => user.phone == phone).length > 0) {
           throw Error("이미 사용중인 전화번호입니다");
         } else if (
