@@ -6,7 +6,8 @@ export default {
       const {
         id,
         password,
-        nickname,
+        phone,
+        name,
         medical_id,
         medical_cate,
         medical_certi,
@@ -14,16 +15,16 @@ export default {
 
       const exist = await prisma.user.findMany({
         where: {
-          OR: [{ id }, { nickname }, { medical_id, medical_cate }],
+          OR: [{ id }, { name }, { medical_id, medical_cate }, { phone }],
         },
       });
       if (exist && exist.length > 0) {
         if (exist.filter((user) => user.id == id).length > 0) {
           throw Error("이미 존재하는 ID 입니다");
-        } else if (
-          exist.filter((user) => user.nickname == nickname).length > 0
-        ) {
+        } else if (exist.filter((user) => user.name == name).length > 0) {
           throw Error("이미 사용중인 닉네임입니다");
+        } else if (exist.filter((user) => user.phone == phone).length > 0) {
+          throw Error("이미 사용중인 전화번호입니다");
         } else if (
           exist.filter(
             (user) =>
@@ -38,7 +39,8 @@ export default {
         data: {
           id,
           password,
-          nickname,
+          phone,
+          name,
           medical_id,
           medical_cate,
           medical_certi,

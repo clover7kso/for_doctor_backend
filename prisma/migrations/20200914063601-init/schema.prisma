@@ -14,14 +14,15 @@ model User {
 
   avatar         String?
   password       String
-  nickname       String  @unique
-  medical_id     String
-  medical_cate   String
-  medical_certi  String
-  permit         Boolean @default(false)
-  email_check    Boolean @default(false)
-  registerSecret String  @default("")
-  likes          Like[]
+  name           String
+  phone          String        @unique
+  medical_cate   String?
+  medical_id     String?
+  medical_certi  String?
+  permit         Boolean       @default(false)
+  email_check    Boolean       @default(false)
+  registerSecret String        @default("")
+  likeProducts   likeProduct[]
 
   Post    Post[]    @relation("PostAuthor")
   Comment Comment[] @relation("CommentAuthor")
@@ -32,11 +33,11 @@ model User {
 }
 
 model Post {
-  id           String   @id @default(cuid())
-  user         User     @relation(name: "PostAuthor", fields: [userNickname], references: [nickname])
-  userNickname String   @default("익명")
-  updatedAt    DateTime @updatedAt @default(now())
-  createdAt    DateTime @default(now())
+  id        String   @id @default(cuid())
+  user      User     @relation(name: "PostAuthor", fields: [userId], references: [id])
+  userId    String
+  updatedAt DateTime @updatedAt @default(now())
+  createdAt DateTime @default(now())
 
   category   String
   title      String
@@ -47,11 +48,11 @@ model Post {
 }
 
 model Comment {
-  id           String   @id @default(cuid())
-  user         User     @relation(name: "CommentAuthor", fields: [userNickname], references: [nickname])
-  userNickname String   @default("익명")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt @default(now())
+  id        String   @id @default(cuid())
+  user      User     @relation(name: "CommentAuthor", fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 
   text   String
   post   Post   @relation(fields: [postId], references: [id])
@@ -64,22 +65,27 @@ model Product {
   createdAt DateTime  @default(now())
   expireAt  DateTime?
 
-  productImage productImage
+  doctor       String?
+  category     String
+  sampleImages sampleImage
   detailImages detailImage[]
   title        String
   content      String        @default("")
   views        Int
-  tag          String
-  Like         Like[]
+  calls        Int
+  ad           Boolean
+  company      String
+  phone        String
+  likeProduct  likeProduct[]
 }
 
-model productImage {
+model sampleImage {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 
   url       String
-  productId String  @unique
+  productId String
   product   Product @relation(fields: [productId], references: [id])
 }
 
@@ -93,7 +99,7 @@ model detailImage {
   product   Product @relation(fields: [productId], references: [id])
 }
 
-model Like {
+model likeProduct {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -109,9 +115,9 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  text           String
-  fromNickname   String
-  toUserNickname String
-  from           User   @relation("MessageSender", fields: [fromNickname], references: [nickname])
-  to             User   @relation("MessageReceiver", fields: [toUserNickname], references: [nickname])
+  text     String
+  fromname String
+  touserId String
+  from     User   @relation("MessageSender", fields: [fromname], references: [id])
+  to       User   @relation("MessageReceiver", fields: [touserId], references: [id])
 }

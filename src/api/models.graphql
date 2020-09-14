@@ -5,7 +5,8 @@ type User {
 
   avatar: String
   password: String!
-  userName: String!
+  phone: String!
+  name: String!
   medical_id: String!
   medical_cate: String!
   medical_certi: String!
@@ -19,7 +20,7 @@ type Post {
   id: String!
   updatedAt: String
   createdAt: String!
-  userNickname: String!
+  userName: String!
 
   category: String!
   title: String!
@@ -27,13 +28,12 @@ type Post {
   views: Int!
   todayViews: Int!
   comments: [Comment]
-  anonymous: Boolean!
 }
 
 type Comment {
   postId: String!
   id: String!
-  userNickname: String
+  userName: String
   createdAt: String!
   updatedAt: String
   text: String!
