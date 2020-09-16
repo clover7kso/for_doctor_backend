@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
+  url = "***"
 }
 
 model HomeAD {
@@ -75,8 +75,8 @@ model Product {
   createdAt DateTime  @default(now())
   expireAt  DateTime?
 
-  mainCategory String
-  subCategory  String?
+  doctor       String?
+  category     String
   sampleImages sampleImage[]
   detailImages detailImage[]
   title        String

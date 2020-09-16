@@ -48,3 +48,37 @@ type Comment {
   updatedAt: String
   text: String!
 }
+
+type Product {
+  id: String!
+  updatedAt: String!
+  createdAt: String!
+  expireAt: String
+
+  mainCategory: String!
+  subCategory: String
+  sampleImages: [sampleImage]!
+  detailImages: [detailImage]!
+  title: String!
+  content: String!
+  views: Int!
+  calls: Int!
+  company: String!
+  phone: String!
+}
+
+type sampleImage {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+
+  url: String!
+}
+
+type detailImage {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+
+  url: String!
+}
