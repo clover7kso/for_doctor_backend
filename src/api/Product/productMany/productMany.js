@@ -6,10 +6,11 @@ export default {
       const rank = 0;
       isAuthenticated(request, rank);
 
-      const first = 20;
+      const first = 10;
       const products = after
         ? await prisma.product.findMany({
             take: first,
+            skip: 1,
             cursor: {
               id: after,
             },
