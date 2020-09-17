@@ -57,7 +57,7 @@ type Product {
 
   mainCategory: String!
   subCategory: String
-  sampleImages: [sampleImage]
+  sampleImages: [sampleImage]!
   detailImages: [detailImage]
   title: String!
   content: String!
