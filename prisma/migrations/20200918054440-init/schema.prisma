@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
+  url = "***"
 }
 
 model HomeAD {
@@ -84,6 +84,7 @@ model Product {
   views        Int
   calls        Int
   aboveAD      Boolean       @default(false)
+  cateAD       Boolean       @default(false)
   company      String
   phone        String
   likeProduct  likeProduct[]
