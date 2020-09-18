@@ -1,8 +1,9 @@
 export default {
   Query: {
     productMany: async (_, args, { request, prisma, isAuthenticated }) => {
-      const { mainCategory, subCategory, after } = args;
+      const { mainCategory, subCategory, after, searchWord } = args;
 
+      console.log(searchWord);
       const rank = 0;
       isAuthenticated(request, rank);
       if (after === "End") return { cursor: "End", products: [] };
@@ -18,6 +19,23 @@ export default {
               AND: [
                 { mainCategory: mainCategory },
                 { subCategory: subCategory },
+              ],
+              OR: [
+                {
+                  company: {
+                    contains: searchWord,
+                  },
+                },
+                {
+                  title: {
+                    contains: searchWord,
+                  },
+                },
+                {
+                  content: {
+                    contains: searchWord,
+                  },
+                },
               ],
             },
             orderBy: {
@@ -35,6 +53,23 @@ export default {
               AND: [
                 { mainCategory: mainCategory },
                 { subCategory: subCategory },
+              ],
+              OR: [
+                {
+                  company: {
+                    contains: searchWord,
+                  },
+                },
+                {
+                  title: {
+                    contains: searchWord,
+                  },
+                },
+                {
+                  content: {
+                    contains: searchWord,
+                  },
+                },
               ],
             },
             orderBy: {
