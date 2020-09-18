@@ -67,6 +67,11 @@ type Product {
   phone: String!
 }
 
+type ProductMany {
+  cursor: String
+  products: [Product]!
+}
+
 type sampleImage {
   id: String!
   createdAt: String!

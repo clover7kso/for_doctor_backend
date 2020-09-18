@@ -5,7 +5,7 @@ export default {
 
       const rank = 0;
       isAuthenticated(request, rank);
-
+      if (after === "End") return { cursor: "End", products: [] };
       const first = 10;
       const products = after
         ? await prisma.product.findMany({
@@ -40,7 +40,10 @@ export default {
               },
             },
           });
-      return products;
+
+      const cursor =
+        first === products.length ? products.slice(-1)[0].id : "End";
+      return { cursor: cursor, products: products };
     },
   },
 };

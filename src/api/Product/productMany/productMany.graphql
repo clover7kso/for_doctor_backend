@@ -1,7 +1,7 @@
 type Query {
   productMany(
     mainCategory: String!
-    subCategory: String!
+    subCategory: String
     after: String
-  ): [Product]!
+  ): ProductMany!
 }

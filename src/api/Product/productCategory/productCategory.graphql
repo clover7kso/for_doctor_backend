@@ -1,3 +1,3 @@
 type Query {
-  productCategory: [String]!
+  productCategory(type: String!): [String]!
 }

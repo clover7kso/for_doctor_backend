@@ -19,6 +19,16 @@ export default {
         ) >= 0
       ) {
         result = [];
+      } else if (
+        [
+          "홈페이지",
+          "인테리어",
+          "SNS마케팅",
+          "바이럴마케팅",
+          "영상촬영",
+        ].indexOf(category) >= 0
+      ) {
+        result = [];
       } else {
         throw Error("올바르지 않은 카테고리입니다");
       }
