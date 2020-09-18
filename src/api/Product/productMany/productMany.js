@@ -20,6 +20,9 @@ export default {
                 { subCategory: subCategory },
               ],
             },
+            orderBy: {
+              aboveAD: "desc",
+            },
             include: {
               sampleImages: {
                 take: 1,
@@ -33,6 +36,9 @@ export default {
                 { mainCategory: mainCategory },
                 { subCategory: subCategory },
               ],
+            },
+            orderBy: {
+              aboveAD: "desc",
             },
             include: {
               sampleImages: {
