@@ -1,10 +1,7 @@
 export default {
   Query: {
-    productOne: async (_, args, { request, prisma, isAuthenticated }) => {
+    productOne: async (_, args, { prisma }) => {
       const { id } = args;
-
-      const rank = 0;
-      isAuthenticated(request, rank);
 
       const product = await prisma.product.findOne({
         where: { id: id },

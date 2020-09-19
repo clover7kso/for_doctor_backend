@@ -1,10 +1,7 @@
 export default {
   Query: {
-    productSubCategory: async (_, args, { request, isAuthenticated }) => {
+    productSubCategory: async (_, args, {}) => {
       const { category } = args;
-
-      const rank = 0;
-      isAuthenticated(request, rank);
 
       var result = null;
       if (category === "백내장") {

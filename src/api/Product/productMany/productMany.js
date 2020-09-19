@@ -1,10 +1,8 @@
 export default {
   Query: {
-    productMany: async (_, args, { request, prisma, isAuthenticated }) => {
+    productMany: async (_, args, { prisma }) => {
       const { mainCategory, subCategory, after, searchWord } = args;
 
-      const rank = 0;
-      isAuthenticated(request, rank);
       if (after === "End") return { cursor: "End", products: [] };
       const first = 10;
       const products = after

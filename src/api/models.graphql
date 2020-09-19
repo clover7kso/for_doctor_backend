@@ -55,6 +55,7 @@ type Product {
   createdAt: String!
   expireAt: String
 
+  isLiked: Boolean!
   mainCategory: String!
   subCategory: String
   sampleImages: [sampleImage]!
