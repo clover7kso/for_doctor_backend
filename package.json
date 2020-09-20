@@ -8,7 +8,7 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/runtime": "^7.11.2",
-    "@prisma/cli": "^2.6.2",
+    "@prisma/cli": "^2.7.1",
     "@prisma/client": "^2.6.2",
     "@sendgrid/mail": "^7.2.5",
     "add": "^2.0.6",
