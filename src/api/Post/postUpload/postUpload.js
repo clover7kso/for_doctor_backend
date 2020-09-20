@@ -1,15 +1,14 @@
 export default {
   Mutation: {
-    postUpload: async (_, args, { prisma }) => {
-      const { id, userNickname, category, title, content } = args;
-
+    postUpload: async (_, args, { request, prisma }) => {
+      const { category, title, content } = args;
+      const user = request.user;
       await prisma.post.create({
         data: {
-          id,
-          userNickname,
-          category,
-          title,
-          content,
+          user: { connect: { id: user.id } },
+          category: category,
+          title: title,
+          content: content,
         },
       });
       return true;
