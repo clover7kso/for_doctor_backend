@@ -42,6 +42,10 @@ type Post {
   comments: [Comment]
   commentCount: Int!
 }
+type PostMany {
+  cursor: String
+  posts: [Post]!
+}
 
 type Comment {
   postId: String!
