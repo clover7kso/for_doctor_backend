@@ -33,6 +33,7 @@ type Post {
   timeFromToday: String!
   userId: String!
   userName: String!
+  userAvatar: String
 
   category: String!
   title: String!
@@ -50,9 +51,12 @@ type PostMany {
 type Comment {
   postId: String!
   id: String!
-  userName: String
   createdAt: String!
   updatedAt: String
+
+  userName: String!
+  userAvatar: String
+  timeFromToday: String!
   text: String!
 }
 
