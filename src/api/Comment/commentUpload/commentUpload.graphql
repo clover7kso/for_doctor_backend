@@ -1,3 +1,3 @@
 type Mutation {
-  commentUpload(id: String!, userNickname: String, text: String!): Boolean!
+  commentUpload(postId: String!, text: String!): Boolean!
 }
