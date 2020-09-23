@@ -14,5 +14,9 @@ export default {
       const item = await prisma.comment.findOne({ where: { id } });
       return timeFromToday(item.createdAt);
     },
+    postTitle: async ({ id }, _, { prisma }) => {
+      const item = await prisma.comment.findOne({ where: { id } }).post();
+      return item.title;
+    },
   },
 };

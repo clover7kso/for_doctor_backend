@@ -1,0 +1,3 @@
+type Mutation {
+  profileEdit(avatar: String, password: String, phone: String): Boolean!
+}

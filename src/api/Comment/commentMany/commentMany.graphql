@@ -1,3 +1,0 @@
-type Query {
-  commentMany(postId: String!): [Comment]!
-}
