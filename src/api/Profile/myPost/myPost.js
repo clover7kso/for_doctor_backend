@@ -7,6 +7,9 @@ export default {
         where: {
           userId: user.id,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
       });
       return posts;
     },
