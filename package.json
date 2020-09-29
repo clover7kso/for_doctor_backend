@@ -34,7 +34,7 @@
   },
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "db_studio": "prisma studio --experimental",
+    "db_studio": "prisma studio",
     "db_pull": "prisma introspect & prisma generate",
     "db_push": "prisma migrate save --name \"init\" --experimental & prisma migrate up --experimental & prisma generate"
   },
