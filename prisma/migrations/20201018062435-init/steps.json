@@ -1,0 +1,61 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "User_Doctor"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "newValue": "\"userDoctorId\""
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "User_Marketer"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "newValue": "\"userMarketId\""
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User_Doctor",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "name",
+      "newValue": "\"userDoctorId\""
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User_Marketer",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "name",
+      "newValue": "\"userMarketId\""
+    }
+  ]
+}

@@ -17,13 +17,19 @@ type User {
   password: String!
   phone: String!
   name: String!
+  role: Int!
+  permit: Boolean!
+  email_check: Boolean!
+  registerSecret: String!
+}
+
+type UserDoctor {
+  id: ID!
+
+  userId: String!
   medical_id: String!
   medical_cate: String!
   medical_certi: String!
-  permit: Boolean!
-  email_check: Boolean!
-
-  registerSecret: String!
 }
 
 type Post {

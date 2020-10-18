@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
+  url = "***"
 }
 
 model HomeAD {
@@ -30,7 +30,7 @@ model User {
   permit         Boolean @default(false)
   email_check    Boolean @default(false)
   registerSecret String  @default("")
-  role           Int
+  role           String
 
   inbox  Message[] @relation("MessageReceiver")
   outbox Message[] @relation("MessageSender")
