@@ -1,0 +1,13 @@
+type Mutation {
+  signUpMarketer(
+    id: String!
+    password: String!
+    phone: String!
+    name: String!
+
+    company_cate: String!
+    company_name: String!
+    company_id: String!
+    company_certi: String!
+  ): Boolean!
+}

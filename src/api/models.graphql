@@ -32,6 +32,16 @@ type UserDoctor {
   medical_certi: String!
 }
 
+type UserMarketer {
+  id: ID!
+
+  userId: String!
+  company_cate: String!
+  company_name: String!
+  company_id: String!
+  company_certi: String!
+}
+
 type Post {
   id: String!
   updatedAt: String
