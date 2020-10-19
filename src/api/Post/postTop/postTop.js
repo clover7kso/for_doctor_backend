@@ -1,6 +1,8 @@
 export default {
   Query: {
-    postTop: async (_, args, { prisma }) => {
+    postTop: async (_, args, { request, isAuthenticated,prisma }) => {
+      isAuthenticated(request,0);
+      
       const {} = args;
       const take = 3;
       const categories = [

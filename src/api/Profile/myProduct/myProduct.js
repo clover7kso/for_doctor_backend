@@ -1,6 +1,8 @@
 export default {
   Query: {
-    myProduct: async (_, args, { request, prisma }) => {
+    myProduct: async (_, args, { request,isAuthenticated, prisma }) => {
+      isAuthenticated(request,2);
+
       const {} = args;
       const user = request.user;
 

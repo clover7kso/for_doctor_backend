@@ -1,6 +1,8 @@
 export default {
   Query: {
-    postMany: async (_, args, { prisma }) => {
+    postMany: async (_, args, { request, isAuthenticated, prisma }) => {
+      isAuthenticated(request,0);
+
       const { category, after, searchWord } = args;
 
       if (after === "End") return { cursor: "End", posts: [] };
