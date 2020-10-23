@@ -19,11 +19,6 @@ export default {
               ],
               OR: [
                 {
-                  company: {
-                    contains: searchWord,
-                  },
-                },
-                {
                   title: {
                     contains: searchWord,
                   },
@@ -52,11 +47,6 @@ export default {
                 { subCategory: subCategory },
               ],
               OR: [
-                {
-                  company: {
-                    contains: searchWord,
-                  },
-                },
                 {
                   title: {
                     contains: searchWord,

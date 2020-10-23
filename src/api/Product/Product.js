@@ -13,5 +13,13 @@ export default {
         })) > 0
       );
     },
+    phone: async ({ id }, _, { prisma }) => {
+      const marketer = await prisma.product.findOne({ where: { id } }).Marketer().user()
+      return marketer.phone;
+    },
+    company: async ({ id }, _, { prisma }) => {
+      const marketer = await prisma.product.findOne({ where: { id } }).Marketer()
+      return marketer.company_name;
+    },
   },
 };
