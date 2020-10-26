@@ -1,7 +1,6 @@
 export default {
   Query: {
-    seeRoom: async (_, args, {request, isAuthenticated, prisma}) => {
-      isAuthenticated(request);
+    seeRoom: async (_, args, {request, prisma}) => {
       const {id} = args;
       const {user} = request;
       const canSee = await prisma.room.findOne({

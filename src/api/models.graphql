@@ -126,8 +126,9 @@ type detailImage {
 
 type Room {
   id: ID!
-  participants: [User!]!
-  messages: [Message!]!
+  from: [User!]!
+  message: [Message!]!
+  allMessages: [Message!]!
   createdAt: String
   updatedAt: String
 }
@@ -140,4 +141,6 @@ type Message {
   room: Room!
   createdAt: String
   updatedAt: String
+
+  timeFromToday: String!
 }

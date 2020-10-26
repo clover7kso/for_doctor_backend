@@ -1,17 +1,17 @@
 export default {
   Query: {
-    seeRooms: (_, __, {request, isAuthenticated, prisma}) => {
-      isAuthenticated(request);
+    seeRooms: async(_, __, {request, prisma}) => {
       const {user} = request;
-      return prisma.room.findAll({
+      const result = await prisma.room.findMany({
         where: {
           participants: {
             some: {
               id: user.id
             }
-          }
-        }
+          },
+        },
       });
+      return result
     }
   }
 }
