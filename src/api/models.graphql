@@ -83,6 +83,7 @@ type Product {
   createdAt: String!
   expireAt: String
 
+  aboveAD: Boolean!
   isLiked: Boolean!
   mainCategory: String!
   subCategory: String
@@ -96,7 +97,7 @@ type Product {
   phone: String!
 }
 
-type ProductMany {
+type ProductMany_Deprecated {
   cursor: String
   products: [Product]!
 }

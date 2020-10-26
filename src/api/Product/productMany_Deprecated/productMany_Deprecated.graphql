@@ -1,7 +1,8 @@
 type Query {
-  productMany(
+  productMany_Deprecated(
     mainCategory: String!
     subCategory: String
+    after: String
     searchWord: String
-  ): [Product]!
+  ): ProductMany_Deprecated!
 }
