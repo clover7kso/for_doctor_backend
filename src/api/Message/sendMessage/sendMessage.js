@@ -2,10 +2,9 @@ import {CHANNEL_NEW_MESSAGE} from "../../../Constants";
 
 export default {
   Mutation: {
-    sendMessage: async (_, args, {request, isAuthenticated, prisma, pubsub}) => {
-      isAuthenticated(request);
+    sendMessage: async (_, args, {request, prisma, pubsub}) => {
       const {user} = request;
-      const {roomId, text, toId} = args;
+      const {roomId, sendText, toId} = args;
       let room;
       if(roomId == undefined) {
         if(user.id !== toId) {
@@ -28,7 +27,7 @@ export default {
       const getTo = participants.filter(participant => participant.id !== user.id)[0];
 
       const msgData = {
-        text,
+        text:sendText,
         room: {
           connect: {id: room.id}
         },

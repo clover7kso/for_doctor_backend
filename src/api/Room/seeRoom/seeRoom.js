@@ -1,18 +1,21 @@
 export default {
   Query: {
     seeRoom: async (_, args, {request, prisma}) => {
-      const {id} = args;
+      const {roomId} = args;
       const {user} = request;
-      const canSee = await prisma.room.findOne({
+      const canSee = await prisma.room.findMany({
         where: {
-          id,
+          id:roomId,
           participants: {
-            some: {id: user.id}
+            some: {
+              id: user.id
+            }
           }
         }
       });
+            
       if(canSee) {
-        return prisma.room.findOne({id});
+        return canSee[0];
       }
       else {
         throw Error("You can't see this");

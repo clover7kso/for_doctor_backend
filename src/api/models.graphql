@@ -126,8 +126,8 @@ type detailImage {
 
 type Room {
   id: ID!
-  from: [User!]!
-  message: [Message!]!
+  participants: [User!]!
+  recentMessage: [Message!]!
   allMessages: [Message!]!
   createdAt: String
   updatedAt: String
