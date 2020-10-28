@@ -13,7 +13,6 @@ export default {
           }
         }
       });
-            
       if(canSee) {
         return canSee[0];
       }
