@@ -8,6 +8,7 @@ export default {
       let room;
       if(roomId == undefined) {
         if(user.id !== toId) {
+          isAuthenticated(request,0);
           room = await prisma.room.create({
             data: {
               participants: {
