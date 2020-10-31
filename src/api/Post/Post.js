@@ -3,11 +3,11 @@ import { timeFromToday } from "../../utils";
 export default {
   Post: {
     userName: async ({ id }, _, { prisma }) => {
-      const user = await prisma.post.findOne({ where: { id } }).user().user();
+      const user = await prisma.post.findOne({ where: { id } }).user();
       return user.name;
     },
     userAvatar: async ({ id }, _, { prisma }) => {
-      const user = await prisma.post.findOne({ where: { id } }).user().user();
+      const user = await prisma.post.findOne({ where: { id } }).user();
       return user.avatar;
     },
     commentCount: async ({ id }, _, { prisma }) => {
