@@ -95,6 +95,9 @@ type Product {
   calls: Int!
   company: String!
   phone: String!
+  marketerId: String!
+  marketerName: String!
+  chatRoomId: String
 }
 
 type ProductMany_Deprecated {
