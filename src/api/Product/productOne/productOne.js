@@ -10,11 +10,17 @@ export default {
             select: {
               url: true,
             },
+            orderBy:{
+              imgOrder:"asc"
+            }
           },
           detailImages: {
             select: {
               url: true,
             },
+            orderBy:{
+              imgOrder:"asc"
+            }
           },
         },
       });

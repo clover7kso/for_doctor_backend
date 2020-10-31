@@ -103,7 +103,7 @@ type ProductMany_Deprecated {
 }
 
 type ProductLike {
-  user: User
+  user: UserDoctor
   product: Product
   marketing: Product
 }

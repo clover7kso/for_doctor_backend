@@ -20,11 +20,21 @@ export default {
                 contains: searchWord,
               },
             },
+            {
+              Marketer:{
+                company_name:{
+                  contains: searchWord,
+                }
+              }
+            }
           ],
         },
         include: {
           sampleImages: {
             take: 1,
+            orderBy:{
+              imgOrder:"asc"
+            }
           },
         },
       })

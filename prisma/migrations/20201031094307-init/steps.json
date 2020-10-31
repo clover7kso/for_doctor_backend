@@ -1,0 +1,59 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "sampleImage",
+          "field": "imgOrder"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "sampleImage",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[productId, imgOrder]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "detailImage",
+          "field": "imgOrder"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "detailImage",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[productId, imgOrder]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

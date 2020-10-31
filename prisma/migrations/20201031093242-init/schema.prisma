@@ -1,10 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["atomicNumberOperations"]
 }
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
+  url = "***"
 }
 
 model HomeAD {
@@ -37,7 +38,6 @@ model User {
 
   UserDoctor   UserDoctor[]   @relation("userDoctorId")
   UserMarketer UserMarketer[] @relation("userMarketId")
-  likeProduct  likeProduct[]
 }
 
 model UserDoctor {
@@ -125,8 +125,7 @@ model sampleImage {
   url       String
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  imgOrder  Int
-  @@unique([productId, imgOrder])
+  imgOrder  Int     @default(0)
 }
 
 model detailImage {
@@ -137,8 +136,7 @@ model detailImage {
   url       String
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  imgOrder  Int
-  @@unique([productId, imgOrder])
+  imgOrder  Int     @default(0)
 }
 
 model likeProduct {
@@ -146,12 +144,10 @@ model likeProduct {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  userId       String
-  user         User        @relation(fields: [userId], references: [id])
-  productId    String
-  product      Product     @relation(fields: [productId], references: [id])
-  UserDoctor   UserDoctor? @relation(fields: [userDoctorId], references: [id])
-  userDoctorId String?
+  userId    String
+  user      UserDoctor @relation(fields: [userId], references: [userId])
+  productId String
+  product   Product    @relation(fields: [productId], references: [id])
 }
 
 model Room {

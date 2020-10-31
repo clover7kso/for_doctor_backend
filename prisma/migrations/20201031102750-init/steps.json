@@ -1,0 +1,85 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "likeProduct",
+      "type": "likeProduct",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "likeProduct",
+      "field": "UserDoctor",
+      "type": "UserDoctor",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "likeProduct",
+          "field": "UserDoctor"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "likeProduct",
+          "field": "UserDoctor"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[userDoctorId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "likeProduct",
+          "field": "UserDoctor"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "likeProduct",
+      "field": "userDoctorId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "likeProduct",
+      "field": "user",
+      "type": "User"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "likeProduct",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "newValue": "[id]"
+    }
+  ]
+}
