@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://DevWoony:rkdtjddns!23@for-doctor.cqtapbmn5giq.ap-northeast-2.rds.amazonaws.com:3306/Doctor"
+  url      = "mysql://for_doctor:rkdtjddns!23@for-doctor-rds-1.csvfhjk1imwz.ap-northeast-2.rds.amazonaws.com:3306/for_doctor_db"
 }
 
 model HomeAD {

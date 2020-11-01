@@ -1,5 +1,5 @@
 {
-  "name": "doctor_sharp_backend",
+  "name": "for_doctor_backend",
   "version": "1.0.0",
   "description": "This is APP for medical dotor's community and medical product's advertisment",
   "dependencies": {
@@ -36,7 +36,7 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "db_studio": "prisma studio --experimental",
     "db_pull": "prisma introspect & prisma generate",
-    "db_push": "prisma migrate save --name \"init\" --experimental & prisma migrate up --experimental & prisma generate"
+    "db_push": "npx prisma db push --preview-feature & prisma generate"
   },
   "repository": {
     "type": "git",
