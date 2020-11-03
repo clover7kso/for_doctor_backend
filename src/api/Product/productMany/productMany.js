@@ -8,6 +8,7 @@ export default {
           AND: [
             { mainCategory: mainCategory },
             { subCategory: subCategory },
+            { confirm: true },
           ],
           OR: [
             {

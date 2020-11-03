@@ -98,6 +98,7 @@ type Product {
   marketerId: String!
   marketerName: String!
   chatRoomId: String
+  confirm: Boolean!
 }
 
 type ProductMany_Deprecated {
