@@ -148,3 +148,25 @@ type Message {
 
   timeFromToday: String!
 }
+
+type Club {
+  id: String!
+  updatedAt: String!
+  createdAt: String!
+
+  timeFromToday: String!
+  userId: String!
+  userName: String!
+  userAvatar: String
+  clubImage: String!
+  title: String!
+  content: String!
+  views: Int!
+  phone: String!
+  chatRoomId: String
+}
+
+type ClubMany {
+  cursor: String
+  clubs: [Club]!
+}

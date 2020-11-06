@@ -40,6 +40,7 @@ model User {
   likeProduct  likeProduct[]
   Post         Post[]         @relation("PostAuthor")
   Comment      Comment[]      @relation("CommentAuthor")
+  Club         Club[]         @relation("ClubAuthor")
 }
 
 model UserDoctor {
@@ -174,4 +175,17 @@ model Message {
   from       User     @relation("MessageSender", fields: [fromUserId], references: [id])
   room       Room     @relation(fields: [roomId], references: [id])
   to         User     @relation("MessageReceiver", fields: [toUserId], references: [id])
+}
+
+model Club {
+  id        String   @id @default(cuid())
+  user      User     @relation(name: "ClubAuthor", fields: [userId], references: [id])
+  userId    String
+  updatedAt DateTime @default(now()) @updatedAt
+  createdAt DateTime @default(now())
+
+  clubImage String
+  title     String
+  content   String
+  views     Int    @default(0)
 }

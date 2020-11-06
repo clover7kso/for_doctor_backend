@@ -1,0 +1,3 @@
+type Query {
+  clubOne(id: String!): Club!
+}
