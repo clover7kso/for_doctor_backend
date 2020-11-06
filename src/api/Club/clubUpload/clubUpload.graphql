@@ -1,3 +1,3 @@
 type Mutation {
-  clubUpload(category: String!, title: String!, content: String!): Boolean!
+  clubUpload(clubImage: String!, title: String!, content: String!): Boolean!
 }
