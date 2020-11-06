@@ -2,20 +2,47 @@ import {CHANNEL_NEW_MESSAGE} from "../../../Constants";
 
 export default {
   Mutation: {
-    sendMessage: async (_, args, {request, prisma, pubsub}) => {
+    sendMessage: async (_, args, {request, isAuthenticated, prisma, pubsub}) => {
       const {user} = request;
       const {roomId, sendText, toId} = args;
       let room;
       if(roomId == undefined) {
-        if(user.id !== toId) {
-          isAuthenticated(request,0);
-          room = await prisma.room.create({
-            data: {
-              participants: {
-                connect: [{id: toId}, {id: user.id}]
-              }
+        let rooms = await prisma.room.findMany({
+            where: {
+              AND: [
+                {
+                  participants: {
+                    some: {
+                      id: user.id
+                    }
+                  }
+                },
+                {
+                  participants: {
+                    some: {
+                      id: toId
+                    }
+                  }
+                }
+              ]
             }
-          });
+        });
+        if(rooms === undefined || rooms.length === 0){
+          if(user.id !== toId) {
+            isAuthenticated(request,0);
+            room = await prisma.room.create({
+              data: {
+                participants: {
+                  connect: [{id: toId}, {id: user.id}]
+                }
+              }
+            });
+          }else{
+            throw Error("본인글에 메세지를 전송할 수 없습니다.");
+          }
+        }
+        else{
+          room = rooms[0]
         }
       }
       else {
