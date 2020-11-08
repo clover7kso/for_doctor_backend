@@ -60,25 +60,7 @@ export default {
           }
         },
       });
-
-      const registerSecret = generateSecret();
-      console.log(registerSecret);
-      try {
-        //throw Error();
-        await sendSecretMail(id, registerSecret);
-        await prisma.user.update({
-          data: {
-            registerSecret,
-          },
-          where: {
-            id,
-          },
-        });
-        return true;
-      } catch (ex) {
-        console.log(ex);
-        throw Error("이메일 발송에 실패했습니다");
-      }
+      return true;
     },
   },
 };

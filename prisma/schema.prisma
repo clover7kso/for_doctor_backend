@@ -22,14 +22,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  avatar         String?
-  password       String
-  name           String
-  phone          String  @unique
-  permit         Boolean @default(false)
-  email_check    Boolean @default(false)
-  registerSecret String  @default("")
-  role           Int
+  avatar   String?
+  password String
+  name     String
+  phone    String  @unique
+  permit   Boolean @default(false)
+  role     Int
 
   inbox  Message[] @relation("MessageReceiver")
   outbox Message[] @relation("MessageSender")
@@ -48,9 +46,10 @@ model UserDoctor {
   user   User   @relation(name: "userDoctorId", fields: [userId], references: [id])
   userId String
 
-  medical_cate  String
-  medical_id    String
-  medical_certi String
+  medical_cate     String
+  medical_id       String
+  medical_certi    String
+  medical_hospital String
 
   likeProducts likeProduct[]
 

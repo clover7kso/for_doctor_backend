@@ -11,6 +11,7 @@ export default {
         medical_id,
         medical_cate,
         medical_certi,
+        medical_hospital,
       } = args;
 
       const existAccount = await prisma.user.findMany({
@@ -54,29 +55,12 @@ export default {
               medical_id:medical_id,
               medical_cate:medical_cate,
               medical_certi:medical_certi,
+              medical_hospital:medical_hospital,
             }
           }
         },
       });
-
-      const registerSecret = generateSecret();
-      console.log(registerSecret);
-      try {
-        //throw Error();
-        await sendSecretMail(id, registerSecret);
-        await prisma.user.update({
-          data: {
-            registerSecret,
-          },
-          where: {
-            id,
-          },
-        });
-        return true;
-      } catch (ex) {
-        console.log(ex);
-        throw Error("이메일 발송에 실패했습니다");
-      }
+      return true;
     },
   },
 };

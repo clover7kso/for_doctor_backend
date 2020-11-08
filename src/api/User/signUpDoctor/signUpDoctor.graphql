@@ -7,5 +7,6 @@ type Mutation {
     medical_id: String!
     medical_cate: String!
     medical_certi: String!
+    medical_hospital: String!
   ): Boolean!
 }
