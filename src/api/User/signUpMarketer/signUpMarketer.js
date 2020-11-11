@@ -1,5 +1,3 @@
-import { generateSecret, sendSecretMail } from "../../../utils";
-
 export default {
   Mutation: {
     signUpMarketer: async (_, args, { prisma }) => {

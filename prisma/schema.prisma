@@ -22,12 +22,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  avatar   String?
-  password String
-  name     String
-  phone    String  @unique
-  permit   Boolean @default(false)
-  role     Int
+  avatar    String?
+  password  String
+  name      String
+  phone     String  @unique
+  permit    Boolean @default(false)
+  role      Int
+  pushToken String?
 
   inbox  Message[] @relation("MessageReceiver")
   outbox Message[] @relation("MessageSender")

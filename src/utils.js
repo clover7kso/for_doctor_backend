@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { Expo } from 'expo-server-sdk';
 
 export const generateSecret = () => {
   var result = "";
@@ -63,3 +64,41 @@ export const timeFromToday = (value) => {
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
 };
+
+export const sendPush= async(tokens, message, landing_page)=>{
+  let expo = new Expo()
+  let messages = [];
+    
+  for (let pushToken of tokens) {
+
+    if (!Expo.isExpoPushToken(pushToken)) {
+      console.error(`Push token ${pushToken} is not a valid Expo push token`);
+      continue;
+    }
+
+    messages.push({
+      to: pushToken,
+      body: message,
+      sound: 'default',
+      priority:'high',
+      data: { landing_page : landing_page?landing_page:null },
+    })
+  }
+
+  let chunks = expo.chunkPushNotifications(messages);
+  let tickets = [];
+  for (let chunk of chunks) {
+    try {
+      let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+      tickets.push(...ticketChunk)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  let index = 0;
+  for(let ticket of tickets){
+    tickets[index].token = tokens[index];
+    index = index + 1;
+  }
+  return tickets
+}

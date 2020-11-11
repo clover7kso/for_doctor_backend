@@ -1,4 +1,5 @@
 import {CHANNEL_NEW_MESSAGE} from "../../../Constants";
+import {sendPush} from "../../../utils"
 
 export default {
   Mutation: {
@@ -73,6 +74,14 @@ export default {
         newMessage: message,
         roomId: room.id
       });
+
+      const toUser = await prisma.user.findOne({
+        where:{
+          id:toId
+        }
+      });
+      
+      sendPush([toUser.pushToken],`[${toUser.name}]님께서 메세지를 보냈습니다. '${sendText}'`)
       return message;
     }
   }
