@@ -16,14 +16,14 @@ export default {
           "안성형",
         ];
       }
-      else if (type === "마케팅"){
+      else if (type === "병원운영"){
         isAuthenticated(request,3);
         result = [
           "홈페이지",
           "인테리어",
-          "SNS마케팅",
-          "바이럴마케팅",
-          "영상촬영",
+          "마케팅",
+          "법률제휴",
+          "세무/회계",
         ];
       }
       return result;
