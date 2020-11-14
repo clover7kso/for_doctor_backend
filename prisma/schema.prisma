@@ -81,6 +81,7 @@ model Post {
   title      String
   content    String
   views      Int       @default(0)
+  anonymous  Boolean   @default(false)
   todayViews Int       @default(0)
   comments   Comment[]
 }
@@ -92,9 +93,10 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  text   String
-  post   Post   @relation(fields: [postId], references: [id])
-  postId String
+  anonymous Boolean @default(false)
+  text      String
+  post      Post    @relation(fields: [postId], references: [id])
+  postId    String
 }
 
 model Product {

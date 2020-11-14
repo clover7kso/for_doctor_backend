@@ -70,7 +70,7 @@ export default {
               }
             },
           });
-
+          
       const cursor = first === posts.length ? posts.slice(-1)[0].id : "End";
       return { cursor: cursor, posts: posts };
     },

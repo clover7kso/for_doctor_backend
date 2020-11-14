@@ -51,6 +51,7 @@ type Post {
   userName: String!
   userAvatar: String
 
+  anonymous: Boolean!
   category: String!
   title: String!
   content: String!
