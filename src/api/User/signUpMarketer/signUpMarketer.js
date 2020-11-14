@@ -27,14 +27,14 @@ export default {
 
       const existMarketer = await prisma.userMarketer.findMany({
         where: {
-          OR: [{ company_cate }],
+          OR: [{ company_id }],
         },
       });
       if (existMarketer && existMarketer.length > 0) {
         if (
           existMarketer.filter(
             (user) =>
-              user.company_cate == company_cate
+              user.company_id == company_id
           ).length > 0
         ) {
           throw Error("사업자번호가 이미 회원가입되있습니다");
@@ -47,7 +47,7 @@ export default {
           password,
           phone,
           name,
-          role:company_cate.includes("의료기기판매")?2:company_cate.includes("병원관련서비스")?3:4,
+          role:"MARKETER",
           UserMarketer:{
             create:{
               company_cate:company_cate,

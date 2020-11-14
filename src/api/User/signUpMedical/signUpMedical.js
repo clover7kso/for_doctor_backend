@@ -1,11 +1,12 @@
 export default {
   Mutation: {
-    signUpDoctor: async (_, args, { prisma }) => {
+    signUpMedical: async (_, args, { prisma }) => {
       const {
         id,
         password,
         phone,
         name,
+        role,
         medical_id,
         medical_cate,
         medical_certi,
@@ -25,7 +26,7 @@ export default {
         } 
       }
 
-      const existDoctor = await prisma.userDoctor.findMany({
+      const existDoctor = await prisma.userMedical.findMany({
         where: {
           OR: [{ medical_id, medical_cate }],
         },
@@ -47,8 +48,8 @@ export default {
           password,
           phone,
           name,
-          role:medical_cate.includes("의사")?0:1,
-          UserDoctor:{
+          role:role,
+          UserMedical:{
             create:{
               medical_id:medical_id,
               medical_cate:medical_cate,

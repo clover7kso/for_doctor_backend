@@ -1,9 +1,10 @@
 type Mutation {
-  signUpDoctor(
+  signUpMedical(
     id: String!
     password: String!
     phone: String!
     name: String!
+    role: String!
     medical_id: String!
     medical_cate: String!
     medical_certi: String!

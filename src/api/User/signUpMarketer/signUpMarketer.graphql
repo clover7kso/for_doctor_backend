@@ -4,7 +4,6 @@ type Mutation {
     password: String!
     phone: String!
     name: String!
-
     company_cate: String!
     company_name: String!
     company_id: String!

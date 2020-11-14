@@ -23,7 +23,7 @@ type User {
   registerSecret: String!
 }
 
-type UserDoctor {
+type UserMedical {
   id: ID!
 
   userId: String!
@@ -107,7 +107,7 @@ type ProductMany_Deprecated {
 }
 
 type ProductLike {
-  user: UserDoctor
+  user: UserMedical
   product: Product
   marketing: Product
 }
