@@ -1,7 +1,7 @@
 export default {
   Query: {
     postMany: async (_, args, { request, isAuthenticated, prisma }) => {
-      isAuthenticated(request,0);
+      isAuthenticated(request,"MEDICAL","UNTIL");
 
       const { category, after, searchWord } = args;
 

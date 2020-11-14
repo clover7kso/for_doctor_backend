@@ -1,7 +1,7 @@
 export default {
   Query: {
     myMarketing: async (_, args, { request,isAuthenticated, prisma }) => {
-      isAuthenticated(request,3);
+      isAuthenticated(request,"MEDICAL","UNTIL");
 
       const {} = args;
       const user = request.user;

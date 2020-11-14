@@ -1,7 +1,7 @@
 export default {
   Mutation: {
     toggleLike: async (_, args, { request, isAuthenticated, prisma }) => {
-      isAuthenticated(request);
+      isAuthenticated(request,"MEDICAL","UNTIL");
       const { productId } = args;
       const { user } = request;
       const filterOpts = {

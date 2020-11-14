@@ -1,7 +1,7 @@
 export default {
   Mutation: {
     postAddView: async (_, args, { request, isAuthenticated,prisma }) => {
-      isAuthenticated(request,0);
+      isAuthenticated(request,"MEDICAL","UNTIL");
 
       const { postId } = args;
 

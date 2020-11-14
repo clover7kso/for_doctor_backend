@@ -1,7 +1,7 @@
 export default {
   Query: {
     myComment: async (_, args, { request,isAuthenticated, prisma }) => {
-      isAuthenticated(request,0);
+      isAuthenticated(request,"MEDICAL","UNTIL");
 
       const {} = args;
       const user = request.user;

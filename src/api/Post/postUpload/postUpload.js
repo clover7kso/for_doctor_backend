@@ -1,7 +1,7 @@
 export default {
   Mutation: {
     postUpload: async (_, args, { request, isAuthenticated, prisma }) => {
-      isAuthenticated(request,0);
+      isAuthenticated(request,"MEDICAL","UNTIL");
       
       const { category, title, content } = args;
       const user = request.user;

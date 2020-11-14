@@ -30,7 +30,7 @@ export default {
         });
         if(rooms === undefined || rooms.length === 0){
           if(user.id !== toId) {
-            isAuthenticated(request,0);
+            isAuthenticated(request,"MEDICAL","UNTIL");
             room = await prisma.room.create({
               data: {
                 participants: {

@@ -27,14 +27,14 @@ model User {
   name      String
   phone     String  @unique
   permit    Boolean @default(false)
-  role      Int
+  role      String
   pushToken String?
 
   inbox  Message[] @relation("MessageReceiver")
   outbox Message[] @relation("MessageSender")
   rooms  Room[]    @relation(name: "RoomParticipants")
 
-  UserDoctor   UserDoctor[]   @relation("userDoctorId")
+  UserMedical  UserMedical[]  @relation("UserMedicalId")
   UserMarketer UserMarketer[] @relation("userMarketId")
   likeProduct  likeProduct[]
   Post         Post[]         @relation("PostAuthor")
@@ -42,9 +42,9 @@ model User {
   Club         Club[]         @relation("ClubAuthor")
 }
 
-model UserDoctor {
+model UserMedical {
   id     String @id @default(cuid())
-  user   User   @relation(name: "userDoctorId", fields: [userId], references: [id])
+  user   User   @relation(name: "UserMedicalId", fields: [userId], references: [id])
   userId String
 
   medical_cate     String
@@ -148,12 +148,12 @@ model likeProduct {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  userId       String
-  user         User        @relation(fields: [userId], references: [id])
-  productId    String
-  product      Product     @relation(fields: [productId], references: [id])
-  UserDoctor   UserDoctor? @relation(fields: [userDoctorId], references: [id])
-  userDoctorId String?
+  userId        String
+  user          User         @relation(fields: [userId], references: [id])
+  productId     String
+  product       Product      @relation(fields: [productId], references: [id])
+  UserMedical   UserMedical? @relation(fields: [UserMedicalId], references: [id])
+  UserMedicalId String?
 }
 
 model Room {
