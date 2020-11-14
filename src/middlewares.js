@@ -5,7 +5,6 @@ export const OPTION_ONLY = "ONLY"
 export const OPTION_UNTIL = "UNTIL"
 
 export const isAuthenticated = (request, rank, option) => {
-  console.log(request.user)
   if (!request.user) {
     throw Error(
       "로그인 토큰이 만료되었습니다. 로그아웃 이후 재로그인 부탁드립니다."

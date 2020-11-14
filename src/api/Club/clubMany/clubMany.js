@@ -15,6 +15,7 @@ export default {
               id: after,
             },
             where: {
+              AND: [{ user:{role:request.user.role} }],
               OR: [
                 {
                   title: {
@@ -31,10 +32,18 @@ export default {
             orderBy: {
               createdAt: "desc",
             },
+            include:{
+              user: {
+                select:{
+                  role:true
+                },
+              }
+            }
           })
         : await prisma.club.findMany({
             take: first,
             where: {
+              AND: [{ user:{role:request.user.role} }],
               OR: [
                 {
                   title: {
@@ -51,6 +60,13 @@ export default {
             orderBy: {
               createdAt: "desc",
             },
+            include:{
+              user: {
+                select:{
+                  role:true
+                },
+              }
+            }
           });
       const cursor = first === clubs.length ? clubs.slice(-1)[0].id : "End";
       return { cursor: cursor, clubs: clubs };

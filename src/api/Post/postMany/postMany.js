@@ -15,7 +15,7 @@ export default {
               id: after,
             },
             where: {
-              AND: [{ category: category }],
+              AND: [{ category: category, user:{role:request.user.role} }],
               OR: [
                 {
                   title: {
@@ -34,12 +34,17 @@ export default {
             },
             include: {
               comments: true,
+              user: {
+                select:{
+                  role:true
+                },
+              }
             },
           })
         : await prisma.post.findMany({
             take: first,
             where: {
-              AND: [{ category: category }],
+              AND: [{ category: category, user:{role:request.user.role} }],
               OR: [
                 {
                   title: {
@@ -58,6 +63,11 @@ export default {
             },
             include: {
               comments: true,
+              user: {
+                select:{
+                  role:true
+                },
+              }
             },
           });
 
