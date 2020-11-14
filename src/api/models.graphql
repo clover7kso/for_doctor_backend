@@ -17,7 +17,7 @@ type User {
   password: String!
   phone: String!
   name: String!
-  role: Int!
+  role: String!
   permit: Boolean!
   email_check: Boolean!
   registerSecret: String!
