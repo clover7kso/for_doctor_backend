@@ -119,6 +119,7 @@ model Product {
   aboveAD      Boolean       @default(false)
   likeProduct  likeProduct[]
   confirm      Boolean       @default(false)
+  youtubeId    String?
 }
 
 model sampleImage {
