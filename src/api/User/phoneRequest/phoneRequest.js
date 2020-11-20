@@ -56,7 +56,7 @@ export default {
                     'type' : 'SMS',
                     'countryCode' : '82',
                     'from' : process.env.SENS_FROM_PHONE,
-                    'content' : `슬기로운 의사 생활 인증번호 ${verifyCode} 입니다.`,
+                    'content' : `데일리닥터 인증번호 ${verifyCode} 입니다.`,
                     'messages' : [
                         {
                             'to' : `${phoneNumber}`
