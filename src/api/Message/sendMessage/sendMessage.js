@@ -6,6 +6,10 @@ export default {
     sendMessage: async (_, args, {request, isAuthenticated, prisma, pubsub}) => {
       const {user} = request;
       const {roomId, sendText, toId} = args;
+      if(user.id === toId) {
+        throw Error("본인글에 메세지를 전송할 수 없습니다.");
+      }
+
       let room;
       if(roomId == undefined) {
         let rooms = await prisma.room.findMany({
@@ -29,18 +33,14 @@ export default {
             }
         });
         if(rooms === undefined || rooms.length === 0){
-          if(user.id !== toId) {
-            isAuthenticated(request,"MEDICAL","UNTIL");
-            room = await prisma.room.create({
-              data: {
-                participants: {
-                  connect: [{id: toId}, {id: user.id}]
-                }
+          isAuthenticated(request,"MEDICAL","UNTIL");
+          room = await prisma.room.create({
+            data: {
+              participants: {
+                connect: [{id: toId}, {id: user.id}]
               }
-            });
-          }else{
-            throw Error("본인글에 메세지를 전송할 수 없습니다.");
-          }
+            }
+          });
         }
         else{
           room = rooms[0]
